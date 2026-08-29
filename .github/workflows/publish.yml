@@ -50,6 +50,7 @@ jobs:
         run: |
           python scripts/build_spec_site.py specification/spec/draft/index.bs \
             --template site \
+            --pdf-stylesheet specification/styles/spec-pdf.css \
             --output _site_source
 
       - name: Configure GitHub Pages

@@ -67,18 +67,27 @@ def github_releases(repository: str) -> list[tuple[Version, str]]:
     )
 
 
-def build_draft(source: Path, destination: Path, base_url: str) -> None:
+def build_draft(
+    source: Path, destination: Path, base_url: str, pdf_stylesheet: Path
+) -> None:
     destination.mkdir(parents=True)
     shutil.copy2(source, destination / "index.bs")
     run(
         "bikeshed",
         "--no-update",
         "spec",
+        "--md-status=LD",
         f"--md-ED={base_url}/versions/draft/",
         str(source),
         str(destination / "index.html"),
     )
-    run("weasyprint", str(destination / "index.html"), str(destination / "index.pdf"))
+    run(
+        "weasyprint",
+        "--stylesheet",
+        str(pdf_stylesheet),
+        str(destination / "index.html"),
+        str(destination / "index.pdf"),
+    )
 
 
 def download_release(
@@ -108,7 +117,12 @@ def download_release(
 
 
 def build_site(
-    source: Path, template: Path, output: Path, repository: str, base_url: str
+    source: Path,
+    template: Path,
+    output: Path,
+    repository: str,
+    base_url: str,
+    pdf_stylesheet: Path,
 ) -> None:
     read_spec_version(source)
     if output.exists():
@@ -117,7 +131,7 @@ def build_site(
     versions_dir = output / "versions"
     releases = github_releases(repository)
 
-    build_draft(source, versions_dir / "draft", base_url)
+    build_draft(source, versions_dir / "draft", base_url, pdf_stylesheet)
     for version, tag in releases:
         download_release(repository, version, tag, versions_dir / str(version))
 
@@ -145,6 +159,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path)
     parser.add_argument("--template", required=True, type=Path)
+    parser.add_argument("--pdf-stylesheet", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     repository = os.environ.get(
@@ -153,7 +168,14 @@ def main() -> None:
     base_url = os.environ.get(
         "SITE_URL", "https://binsparse.github.io"
     ).rstrip("/")
-    build_site(args.source, args.template, args.output, repository, base_url)
+    build_site(
+        args.source,
+        args.template,
+        args.output,
+        repository,
+        base_url,
+        args.pdf_stylesheet,
+    )
 
 
 if __name__ == "__main__":

@@ -11,6 +11,11 @@
     <header class="site-header">
       <a class="wordmark" href="{{ '/' | relative_url }}">Binsparse</a>
       <nav aria-label="Primary navigation">
+        {% if site.data.versions.latest_stable %}
+        <a href="{{ '/versions/' | append: site.data.versions.latest_stable | append: '/' | relative_url }}">Latest</a>
+        {% else %}
+        <a href="{{ '/versions/draft/' | relative_url }}">Latest</a>
+        {% endif %}
         <a href="{{ '/versions/draft/' | relative_url }}">Draft</a>
         <a href="{{ '/versions/' | relative_url }}">Versions</a>
         <a href="https://github.com/Binsparse">GitHub</a>
