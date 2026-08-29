@@ -7,13 +7,24 @@ import argparse
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
 
 from semantic_version import Version
 
-from build_spec_release import read_spec_version
+
+SPEC_VERSION_PATTERN = re.compile(
+    r"^Text Macro:\s*SPECVERSION\s+(\S+)\s*$", re.MULTILINE
+)
+
+
+def read_spec_version(source: Path) -> Version:
+    match = SPEC_VERSION_PATTERN.search(source.read_text(encoding="utf-8"))
+    if match is None:
+        raise ValueError(f"{source} does not define the SPECVERSION Bikeshed macro")
+    return Version(match.group(1))
 
 
 def run(*args: str, capture: bool = False) -> str:
@@ -136,9 +147,11 @@ def main() -> None:
     parser.add_argument("--template", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    repository = os.environ["GITHUB_REPOSITORY"]
+    repository = os.environ.get(
+        "SPEC_REPOSITORY", "Binsparse/binsparse-specification"
+    )
     base_url = os.environ.get(
-        "SITE_URL", f"https://{repository.split('/', 1)[0]}.github.io/{repository.split('/', 1)[1]}"
+        "SITE_URL", "https://binsparse.github.io"
     ).rstrip("/")
     build_site(args.source, args.template, args.output, repository, base_url)
 

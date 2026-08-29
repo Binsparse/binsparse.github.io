@@ -3,21 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | default: site.description }}">
     <title>{{ page.title | default: site.title }}</title>
-    <style>
-      body {
-        color: #222;
-        font-family: system-ui, sans-serif;
-        line-height: 1.5;
-        margin: 3rem auto;
-        max-width: 48rem;
-        padding: 0 1.25rem;
-      }
-      a { color: #0645ad; }
-      li { margin: 0.5rem 0; }
-    </style>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   </head>
-  <body>
+  <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+    <header class="site-header">
+      <a class="wordmark" href="{{ '/' | relative_url }}">Binsparse</a>
+      <nav aria-label="Primary navigation">
+        <a href="{{ '/versions/draft/' | relative_url }}">Draft</a>
+        <a href="{{ '/versions/' | relative_url }}">Versions</a>
+        <a href="https://github.com/Binsparse">GitHub</a>
+      </nav>
+    </header>
     <main>{{ content }}</main>
+    <footer>
+      <span>Binsparse is developed openly on GitHub.</span>
+      <a href="https://github.com/Binsparse/binsparse-specification">Contribute to the specification</a>
+    </footer>
   </body>
 </html>

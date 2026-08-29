@@ -6,6 +6,9 @@ permalink: /versions/
 
 # Binsparse specification versions
 
+The draft reflects ongoing work. Released versions are immutable snapshots of
+the Bikeshed source and its rendered HTML and PDF.
+
 - [Draft](draft/)
 {% if site.data.versions.latest_stable %}
 - [Latest stable ({{ site.data.versions.latest_stable }})]({{ site.data.versions.latest_stable }}/)

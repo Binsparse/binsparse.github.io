@@ -1,2 +1,3 @@
-title: Binsparse Specification
+title: Binsparse
+description: A portable binary format for sparse matrices and tensors.
 markdown: kramdown

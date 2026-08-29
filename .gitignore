@@ -1,0 +1,14 @@
+# Jekyll build output and caches
+_site/
+_site_source/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Local Ruby dependencies
+.bundle/
+vendor/
+
+# Python caches
+__pycache__/
+*.py[cod]
