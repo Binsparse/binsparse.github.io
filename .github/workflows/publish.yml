@@ -39,6 +39,8 @@ jobs:
 
       - name: Install build tools
         run: |
+          sudo apt-get update
+          sudo apt-get install --yes imagemagick librsvg2-bin
           python -m pip install --upgrade pip
           python -m pip install --requirement requirements.txt
 
@@ -52,6 +54,21 @@ jobs:
             --template site \
             --pdf-stylesheet specification/styles/spec-pdf.css \
             --output _site_source
+
+      - name: Build favicon assets
+        run: |
+          rsvg-convert --width 512 --height 512 --keep-aspect-ratio \
+            _site_source/assets/icons/icon.svg \
+            --output /tmp/binsparse-icon-source.png
+          convert /tmp/binsparse-icon-source.png -gravity center \
+            -background none -extent 512x512 /tmp/binsparse-icon.png
+          convert /tmp/binsparse-icon.png -resize 180x180 \
+            _site_source/assets/icons/apple-touch-icon.png
+          convert /tmp/binsparse-icon.png -resize 192x192 \
+            _site_source/assets/icons/icon-192.png
+          cp /tmp/binsparse-icon.png _site_source/assets/icons/icon-512.png
+          convert /tmp/binsparse-icon.png -define icon:auto-resize=48,32,16 \
+            _site_source/favicon.ico
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

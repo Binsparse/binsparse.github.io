@@ -72,7 +72,7 @@ def build_draft(
 ) -> None:
     destination.mkdir(parents=True)
     shutil.copy2(source, destination / "index.bs")
-    logo = source.parent / "logo.png"
+    logo = source.parent / "logo.svg"
     if not logo.is_file():
         raise FileNotFoundError(f"Specification logo not found: {logo}")
     shutil.copy2(logo, destination / logo.name)
@@ -118,9 +118,9 @@ def download_release(
             if not artifact.is_file():
                 raise FileNotFoundError(f"GitHub Release {tag} is missing {artifact.name}")
             shutil.copy2(artifact, destination / f"index.{extension}")
-        if 'src="logo.png"' in (temp / f"{artifact_name}.html").read_text(
-            encoding="utf-8"
-        ):
+        html = (temp / f"{artifact_name}.html").read_text(encoding="utf-8")
+        if 'src="logo.svg"' in html:
+            logo_name = "logo.svg"
             run(
                 "gh",
                 "release",
@@ -131,11 +131,13 @@ def download_release(
                 "--dir",
                 str(temp),
                 "--pattern",
-                "logo.png",
+                logo_name,
             )
-            logo = temp / "logo.png"
+            logo = temp / logo_name
             if not logo.is_file():
-                raise FileNotFoundError(f"GitHub Release {tag} is missing logo.png")
+                raise FileNotFoundError(
+                    f"GitHub Release {tag} is missing {logo_name}"
+                )
             shutil.copy2(logo, destination / logo.name)
 
 
