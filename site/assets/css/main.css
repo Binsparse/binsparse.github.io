@@ -1,7 +1,7 @@
 :root {
   --ink: #17211b;
   --muted: #5c6861;
-  --paper: #f5f3ea;
+  --paper: #f4d7b8;
   --line: #cdd1c5;
 }
 
@@ -29,10 +29,15 @@ a { color: inherit; text-underline-offset: 0.2em; }
 }
 
 .wordmark {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  display: inline-flex;
+  flex: 0 0 auto;
   text-decoration: none;
+}
+
+.wordmark img {
+  display: block;
+  height: auto;
+  width: 9rem;
 }
 
 nav { display: flex; gap: 1.5rem; }
@@ -69,6 +74,8 @@ footer {
 
 @media (max-width: 42rem) {
   body { padding: 0 1.1rem; }
+  .site-header { gap: 1rem; flex-wrap: wrap; }
+  .wordmark img { width: 6.5rem; }
   nav { gap: 0.8rem; }
   footer { gap: 1rem; flex-direction: column; }
 }

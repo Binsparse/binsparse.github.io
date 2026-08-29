@@ -9,7 +9,9 @@
   </head>
   <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
     <header class="site-header">
-      <a class="wordmark" href="{{ '/' | relative_url }}">Binsparse</a>
+      <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Binsparse home">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Binsparse">
+      </a>
       <nav aria-label="Primary navigation">
         {% if site.data.versions.latest_stable %}
         <a href="{{ '/versions/' | append: site.data.versions.latest_stable | append: '/' | relative_url }}">Latest</a>
