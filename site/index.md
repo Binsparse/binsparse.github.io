@@ -36,3 +36,15 @@ The specification and its development process are public and community-driven.
 
 - [Current draft]({{ '/versions/draft/' | relative_url }})
 - [All versions]({{ '/versions/' | relative_url }})
+
+## Parsers
+
+Here is a table listing the current tensor frameworks that support the format:
+
+| Framework (Parser) | Language | Status |
+| ------ | ------ | ----- |
+| [Scipy](https://scipy.org/) ((binsparse-reference-python)[https://github.com/Binsparse/binsparse-reference-python]) | Python | Compliant |
+| [PyData/sparse](https://sparse.pydata.org/en/stable/) ((binsparse-reference-python)[https://github.com/Binsparse/binsparse-reference-python]) | Python | Compliant |
+| [PyTorch](https://pytorch.org/) ((binsparse-reference-python)[https://github.com/Binsparse/binsparse-reference-python]) | Python | Compliant |
+| [TACO](http://tensor-compiler.org/) ([binsparse-taco-parser](https://github.com/tensor-compiler/taco-binsparse-parser)) | C/C++ | Functional |
+| [Finch.jl](https://finch-tensor.org/Finch.jl/stable/) | Julia | Functional |

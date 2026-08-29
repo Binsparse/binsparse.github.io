@@ -65,6 +65,25 @@ main > h1 {
 main > h2 { color: var(--accent); margin-top: 3rem; }
 main > p, main > ul { color: var(--muted); max-width: 50rem; }
 
+table {
+  border-collapse: collapse;
+  display: block;
+  margin: 1.5rem 0 3rem;
+  overflow-x: auto;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.8rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { color: var(--ink); }
+td { color: var(--muted); }
+th:first-child, td:first-child { padding-left: 0; }
+
 footer {
   border-top: 1px solid var(--line);
   color: var(--muted);
