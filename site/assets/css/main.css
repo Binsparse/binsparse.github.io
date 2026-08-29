@@ -2,6 +2,7 @@
   --ink: #17211b;
   --muted: #5c6861;
   --paper: #f4d7b8;
+  --accent: #cc6c02;
   --line: #cdd1c5;
 }
 
@@ -47,6 +48,7 @@ nav a:hover { color: var(--ink); }
 main { min-height: 70vh; }
 
 main > h1 {
+  color: var(--accent);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   letter-spacing: -0.055em;
   margin-top: 5rem;
@@ -60,7 +62,7 @@ main > h1 {
   max-width: 11ch;
 }
 
-main > h2 { margin-top: 3rem; }
+main > h2 { color: var(--accent); margin-top: 3rem; }
 main > p, main > ul { color: var(--muted); max-width: 50rem; }
 
 footer {
