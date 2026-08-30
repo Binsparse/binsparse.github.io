@@ -191,7 +191,7 @@ def main() -> None:
         "SPEC_REPOSITORY", "Binsparse/binsparse-specification"
     )
     base_url = os.environ.get(
-        "SITE_URL", "https://binsparse.github.io"
+        "SITE_URL", "https://binsparse.org"
     ).rstrip("/")
     build_site(
         args.source,

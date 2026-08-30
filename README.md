@@ -1,7 +1,7 @@
 # Binsparse website
 
 This repository publishes the Binsparse specification at
-<https://binsparse.github.io/>.
+<https://binsparse.org/>.
 
 The publishing workflow checks out the current draft from
 [`Binsparse/binsparse-specification`](https://github.com/Binsparse/binsparse-specification),
